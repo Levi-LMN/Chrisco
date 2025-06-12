@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chrisco Thika Sermon Title</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Calibri', sans-serif;
+      background: #ffffff;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      box-sizing: border-box;
+    }
+    .container {
+      text-align: center;
+      max-width: 80%;
+      padding: 20px;
+      border: 4px solid #005a9c;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      transition: all 0.5s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards;
+    }
+    .church-name {
+      font-size: 48px;
+      font-weight: bold;
+      color: #005a9c;
+      margin-bottom: 10px;
+    }
+    .title {
+      font-size: 60px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .meta {
+      font-size: 28px;
+      color: #444;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    #form {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #fff;
+      border: 2px solid #005a9c;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+      z-index: 10;
+    }
+    #form input {
+      margin-bottom: 10px;
+      padding: 5px;
+      width: 100%;
+    }
+    #form button {
+      background-color: #005a9c;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="form">
+    <input type="text" id="input-title" placeholder="Enter sermon title"><br>
+    <input type="text" id="input-meta" placeholder="Enter speaker & date"><br>
+    <button onclick="updateSermon()">Update</button>
+  </div>
+
+  <div class="container">
+    <div class="church-name">Chrisco Church Thika</div>
+    <div class="title" id="sermon-title">Stretch Joyfully Beyond Your Capacity</div>
+    <div class="meta" id="sermon-meta">June 16, 2025 · Pastor James Kiganjo</div>
+  </div>
+
+  <script>
+    function updateSermon() {
+      const title = document.getElementById('input-title').value;
+      const meta = document.getElementById('input-meta').value;
+      if (title) document.getElementById('sermon-title').innerText = title;
+      if (meta) document.getElementById('sermon-meta').innerText = meta;
+    }
+  </script>
+</body>
+</html>
