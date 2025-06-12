@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chrisco Church Thika - Live Overlay</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,13 +17,9 @@
             height: 300px;
             overflow: hidden;
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            background: linear-gradient(135deg, #0a0f1c 0%, #1a1d2e 50%, #2a2d3e 100%);
             position: relative;
-            --primary: #ffffff;
-            --secondary: #fbbf24;
-            --accent: #10b981;
-            --text-primary: #ffffff;
-            --text-secondary: #e5e7eb;
+            color: white;
         }
 
         .overlay-container {
@@ -32,75 +28,64 @@
             height: 100%;
             display: flex;
             align-items: center;
-            padding: 0 40px;
-            gap: 40px;
+            padding: 20px 40px;
+            gap: 30px;
         }
 
-        /* Left Section - Compact Church Identity */
+        /* Left Section - Minimal Church Branding */
         .left-section {
             flex-shrink: 0;
             display: flex;
-            flex-direction: column;
             align-items: center;
             gap: 15px;
-            width: 180px;
-        }
-
-        .church-identity {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
+            width: 280px;
         }
 
         .logo {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--secondary), #f59e0b);
-            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Playfair Display', serif;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 800;
             color: #1a1a2e;
-            box-shadow: 0 0 25px rgba(251, 191, 36, 0.4);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
         }
 
         .church-info h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.3px;
-            line-height: 1.1;
-            text-align: center;
+            color: #ffffff;
+            letter-spacing: -0.2px;
+            line-height: 1.2;
         }
 
         .church-info .tagline {
-            font-size: 9px;
-            color: var(--text-secondary);
+            font-size: 8px;
+            color: #9ca3af;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 3px;
-            opacity: 0.7;
-            text-align: center;
+            letter-spacing: 0.8px;
+            margin-top: 2px;
         }
 
-        .live-badge {
+        .live-indicator {
             display: flex;
             align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, var(--accent), #059669);
-            padding: 8px 16px;
-            border-radius: 50px;
-            box-shadow: 0 3px 15px rgba(16, 185, 129, 0.3);
+            gap: 6px;
+            background: rgba(239, 68, 68, 0.9);
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-left: 15px;
         }
 
         .live-dot {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             background: white;
             border-radius: 50%;
             animation: pulse 1.5s ease-in-out infinite;
@@ -108,162 +93,153 @@
 
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.3); }
+            50% { opacity: 0.6; transform: scale(1.2); }
         }
 
         .live-text {
             color: white;
-            font-weight: 700;
-            font-size: 11px;
+            font-weight: 600;
+            font-size: 9px;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.5px;
         }
 
-        /* Center Section - Expanded Main Content */
+        /* Center Section - Main Content Focus */
         .center-section {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 20px;
             max-width: 1200px;
         }
 
-        .message-area {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .message-label {
-            font-size: 12px;
-            color: var(--secondary);
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-
-        .message-title {
+        /* Sermon Title - Primary Focus */
+        .sermon-title {
             font-family: 'Playfair Display', serif;
-            font-size: 52px;
-            font-weight: 700;
-            color: var(--text-primary);
+            font-size: 48px;
+            font-weight: 800;
+            color: #ffffff;
             line-height: 1.1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-align: center;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
         }
 
-        .scripture-area {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 35px;
-            padding: 30px 40px;
+        /* Scripture - Secondary Focus */
+        .scripture-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px 35px;
             position: relative;
-            overflow: hidden;
+            text-align: center;
         }
 
-        .scripture-area::before {
+        .scripture-container::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--secondary), var(--accent));
-        }
-
-        .scripture-content {
-            display: flex;
-            align-items: center;
-            gap: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #fbbf24, #10b981);
+            border-radius: 2px;
         }
 
         .scripture-reference {
             font-family: 'Playfair Display', serif;
-            font-size: 26px;
-            font-weight: 600;
-            color: var(--secondary);
-            flex-shrink: 0;
-        }
-
-        .scripture-divider {
-            width: 3px;
-            height: 45px;
-            background: linear-gradient(180deg, var(--secondary), transparent);
-            flex-shrink: 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .scripture-text {
-            font-size: 18px;
-            color: var(--text-secondary);
+            font-size: 16px;
+            color: #e5e7eb;
             line-height: 1.5;
             font-style: italic;
             font-weight: 400;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        /* Right Section - Compact Info & Time */
+        .scripture-text::before,
+        .scripture-text::after {
+            content: '"';
+            font-size: 24px;
+            color: #fbbf24;
+            font-family: serif;
+        }
+
+        /* Right Section - Minimal Info */
         .right-section {
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             align-items: flex-end;
             text-align: right;
-            width: 200px;
+            width: 180px;
         }
 
         .speaker-info {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 15px 20px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 10px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .speaker-label {
-            font-size: 9px;
-            color: #6b7280;
+            font-size: 8px;
+            color: #9ca3af;
             text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 1.2px;
-            margin-bottom: 5px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
         }
 
         .speaker-name {
-            font-size: 15px;
-            color: #1f2937;
+            font-size: 12px;
+            color: #ffffff;
             font-weight: 700;
         }
 
         .time-display {
-            color: var(--text-primary);
-            font-size: 16px;
-            font-weight: 600;
+            color: #d1d5db;
+            font-size: 12px;
+            font-weight: 500;
             font-family: 'Inter', monospace;
-            opacity: 0.9;
+            opacity: 0.8;
         }
 
-        /* Bottom Ticker */
+        /* Bottom Ticker - Minimized */
         .ticker-bar {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 50px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            border-top: 2px solid var(--secondary);
+            height: 35px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(251, 191, 36, 0.3);
             display: flex;
             align-items: center;
             overflow: hidden;
         }
 
         .ticker-label {
-            background: var(--secondary);
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
             color: #1a1a2e;
-            padding: 15px 30px;
-            font-weight: 800;
-            font-size: 12px;
+            padding: 8px 20px;
+            font-weight: 700;
+            font-size: 9px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             position: relative;
             flex-shrink: 0;
         }
@@ -272,27 +248,27 @@
             content: '';
             position: absolute;
             top: 0;
-            right: -15px;
+            right: -10px;
             width: 0;
             height: 0;
-            border-left: 15px solid var(--secondary);
-            border-top: 25px solid transparent;
-            border-bottom: 25px solid transparent;
+            border-left: 10px solid #f59e0b;
+            border-top: 17.5px solid transparent;
+            border-bottom: 17.5px solid transparent;
         }
 
         .ticker-content {
             flex: 1;
             overflow: hidden;
-            padding: 0 30px;
+            padding: 0 20px;
         }
 
         .ticker-text {
             display: inline-block;
             white-space: nowrap;
-            color: var(--text-primary);
-            font-size: 15px;
-            font-weight: 500;
-            animation: scroll 35s linear infinite;
+            color: #e5e7eb;
+            font-size: 11px;
+            font-weight: 400;
+            animation: scroll 40s linear infinite;
             padding-left: 100%;
         }
 
@@ -302,22 +278,22 @@
         }
 
         /* Smooth entrance animations */
-        .message-title {
+        .sermon-title {
             opacity: 0;
             transform: translateY(20px);
-            animation: slideUp 1s ease-out 0.3s forwards;
+            animation: slideUp 1s ease-out 0.2s forwards;
         }
 
-        .scripture-area {
+        .scripture-container {
             opacity: 0;
             transform: translateY(20px);
-            animation: slideUp 1s ease-out 0.6s forwards;
+            animation: slideUp 1s ease-out 0.5s forwards;
         }
 
         .speaker-info {
             opacity: 0;
             transform: translateX(20px);
-            animation: slideLeft 1s ease-out 0.4s forwards;
+            animation: slideLeft 1s ease-out 0.3s forwards;
         }
 
         @keyframes slideUp {
@@ -334,47 +310,49 @@
             }
         }
 
-        /* Subtle glow effects */
+        /* Subtle glow effect on logo */
         .logo {
-            animation: glow 4s ease-in-out infinite alternate;
+            animation: glow 3s ease-in-out infinite alternate;
         }
 
         @keyframes glow {
-            0% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
-            100% { box-shadow: 0 0 35px rgba(251, 191, 36, 0.6); }
+            0% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); }
+            100% { box-shadow: 0 0 25px rgba(251, 191, 36, 0.5); }
+        }
+
+        /* Responsive text scaling for better readability */
+        @media (max-width: 1600px) {
+            .sermon-title {
+                font-size: 42px;
+            }
+            
+            .scripture-text {
+                font-size: 15px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="overlay-container">
         <div class="left-section">
-            <div class="church-identity">
-                <div class="logo">CC</div>
-                <div class="church-info">
-                    <h1>CHRISCO CHURCH THIKA</h1>
-                    <div class="tagline">Faith • Community • Purpose</div>
-                </div>
+            <div class="logo">CC</div>
+            <div class="church-info">
+                <h1>CHRISCO CHURCH THIKA</h1>
+                <div class="tagline">Faith • Community • Purpose</div>
             </div>
-            
-            <div class="live-badge">
+            <div class="live-indicator">
                 <div class="live-dot"></div>
                 <div class="live-text">Live</div>
             </div>
         </div>
 
         <div class="center-section">
-            <div class="message-area">
-                <div class="message-label">Today's Message</div>
-                <div class="message-title">Walking in Faith Through Trials</div>
-            </div>
+            <div class="sermon-title">Walking in Faith Through Trials</div>
             
-            <div class="scripture-area">
-                <div class="scripture-content">
-                    <div class="scripture-reference">James 1:2-4</div>
-                    <div class="scripture-divider"></div>
-                    <div class="scripture-text">
-                        "Consider it pure joy, my brothers and sisters, whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance."
-                    </div>
+            <div class="scripture-container">
+                <div class="scripture-reference">James 1:2-4</div>
+                <div class="scripture-text">
+                    Consider it pure joy, my brothers and sisters, whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance.
                 </div>
             </div>
         </div>
