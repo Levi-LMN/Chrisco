@@ -1,139 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Chrisco Church Thika Sermon Overlay</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      width: 1920px;
-      height: 300px;
-      background: linear-gradient(90deg, #f5f7fa, #c3cfe2);
-      color: #1a237e;
-      overflow: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrisco Church Thika - Live Overlay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .overlay {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 100%;
-      padding: 20px 60px;
-      box-sizing: border-box;
-      position: relative;
-    }
+        body {
+            width: 1920px;
+            height: 300px;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            background: linear-gradient(135deg, 
+                rgba(139, 69, 19, 0.95) 0%, 
+                rgba(101, 67, 33, 0.98) 25%, 
+                rgba(72, 61, 139, 0.96) 50%, 
+                rgba(25, 25, 112, 0.98) 75%, 
+                rgba(0, 0, 0, 0.92) 100%);
+            backdrop-filter: blur(2px);
+            position: relative;
+        }
 
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 36px;
-      font-weight: 600;
-      color: #0d47a1;
-      text-shadow: 1px 1px 2px #cfd8dc;
-    }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 49%, rgba(255, 255, 255, 0.02) 50%, transparent 51%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
 
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
 
-    .logo {
-      width: 50px;
-      height: 50px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/9/9a/Christian_cross.svg') no-repeat center;
-      background-size: contain;
-    }
+        .overlay-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1fr 400px 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 10px;
+            padding: 20px;
+            z-index: 10;
+        }
 
-    .sermon-title {
-      text-align: center;
-      font-size: 64px;
-      font-weight: 800;
-      font-family: 'Great Vibes', cursive;
-      color: #263238;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-      animation: zoomIn 1.5s ease-in-out;
-    }
+        .church-header {
+            grid-column: 1 / -1;
+            grid-row: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, 
+                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(255, 255, 255, 0.25) 50%, 
+                rgba(255, 255, 255, 0.15) 100%);
+            border-radius: 25px;
+            padding: 0 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInTop 1.5s ease-out;
+        }
 
-    @keyframes zoomIn {
-      0% {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
+        @keyframes slideInTop {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
 
-    .ticker {
-      position: relative;
-      height: 45px;
-      overflow: hidden;
-      background: linear-gradient(to right, #0d47a1, #1976d2);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      font-size: 26px;
-      font-weight: 500;
-      padding-left: 30px;
-    }
+        .church-name {
+            font-family: 'Cinzel', serif;
+            font-size: 36px;
+            font-weight: 600;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            letter-spacing: 2px;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
 
-    .ticker-text {
-      display: inline-block;
-      white-space: nowrap;
-      padding-left: 100%;
-      animation: tickerMove 25s linear infinite;
-    }
+        @keyframes glow {
+            from {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 0 0 10px rgba(255, 215, 0, 0.3);
+            }
+            to {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.6);
+            }
+        }
 
-    @keyframes tickerMove {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
+        .live-clock {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 10px 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
 
-    .footer-bar {
-      position: absolute;
-      bottom: 0;
-      right: 60px;
-      font-size: 18px;
-      font-weight: 400;
-      color: #37474f;
-      font-style: italic;
-    }
-  </style>
+        .time-display {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 2px;
+        }
+
+        .date-display {
+            font-size: 12px;
+            color: #FFD700;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sermon-section {
+            grid-column: 1 / -1;
+            grid-row: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            animation: slideInLeft 2s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .sermon-card {
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(255, 255, 255, 0.05) 100%);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .sermon-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-label {
+            font-size: 11px;
+            color: #FFD700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .card-content {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #FFFFFF;
+            font-weight: 600;
+            line-height: 1.3;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        .verse-text {
+            font-size: 16px;
+            font-style: italic;
+        }
+
+        .news-banner {
+            grid-column: 1 / -1;
+            grid-row: 3;
+            background: linear-gradient(90deg, 
+                rgba(0, 0, 0, 0.8) 0%, 
+                rgba(25, 25, 112, 0.9) 50%, 
+                rgba(0, 0, 0, 0.8) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            animation: slideInBottom 2.5s ease-out;
+        }
+
+        @keyframes slideInBottom {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .banner-label {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+            padding: 10px 25px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-right: 20px;
+            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 50%, calc(100% - 15px) 100%, 0 100%);
+        }
+
+        .scrolling-text {
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .scroll-content {
+            display: inline-block;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 400;
+            animation: scroll 25s linear infinite;
+            padding-left: 100%;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .decorative-cross {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            color: rgba(255, 215, 0, 0.6);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .corner-ornament {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .corner-ornament.top-left {
+            top: 10px;
+            left: 10px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .corner-ornament.bottom-right {
+            bottom: 10px;
+            right: 10px;
+            animation: pulse 3s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="overlay">
-    <div class="top-bar">
-      <div class="logo-area">
-        <div class="logo"></div>
-        <div>Chrisco Church Thika</div>
-      </div>
-      <div id="clock"></div>
-    </div>
-    <div class="sermon-title">Overflowing with Grace</div>
-    <div class="ticker">
-      <div class="ticker-text">
-        Speaker: Pastor James Kiganjo · Date: June 16, 2025 · Sunday Service · Live from Chrisco Church Thika · Join us in person or online · God is doing a new thing in your life today!
-      </div>
-    </div>
-    <div class="footer-bar">Streaming live every Sunday · Faith. Worship. Community.</div>
-  </div>
+    <div class="corner-ornament top-left"></div>
+    <div class="corner-ornament bottom-right"></div>
+    <div class="decorative-cross">✝</div>
+    
+    <div class="overlay-container">
+        <div class="church-header">
+            <div class="church-name">CHRISCO CHURCH THIKA</div>
+            <div class="live-clock">
+                <div class="time-display" id="time">10:30 AM</div>
+                <div class="date-display" id="date">Sunday, June 12, 2025</div>
+            </div>
+        </div>
 
-  <script>
-    function updateClock() {
-      const now = new Date();
-      const h = String(now.getHours()).padStart(2, '0');
-      const m = String(now.getMinutes()).padStart(2, '0');
-      const s = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById('clock').textContent = `${h}:${m}:${s}`;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-  </script>
+        <div class="sermon-section">
+            <div class="sermon-card">
+                <div class="card-label">Today's Message</div>
+                <div class="card-content">Walking in Faith Through Trials</div>
+            </div>
+            <div class="sermon-card">
+                <div class="card-label">Scripture Reading</div>
+                <div class="card-content verse-text">James 1:2-4</div>
+            </div>
+            <div class="sermon-card">
+                <div class="card-label">Speaker</div>
+                <div class="card-content">Pastor Michael Kamau</div>
+            </div>
+        </div>
+
+        <div class="news-banner">
+            <div class="banner-label">Church News</div>
+            <div class="scrolling-text">
+                <div class="scroll-content">
+                    Join us for Prayer Night every Wednesday at 7:00 PM • Youth Fellowship meets Saturdays at 4:00 PM • Upcoming baptism service on June 25th • Women's Conference: "Daughters of Purpose" - July 8-10 • Men's Breakfast Fellowship next Saturday at 8:00 AM • Children's Sunday School starts at 9:00 AM • Mid-week Bible Study continues this Thursday
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const timeOptions = {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true,
+                timeZone: 'Africa/Nairobi'
+            };
+            const dateOptions = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                timeZone: 'Africa/Nairobi'
+            };
+            
+            document.getElementById('time').textContent = now.toLocaleTimeString('en-US', timeOptions);
+            document.getElementById('date').textContent = now.toLocaleDateString('en-US', dateOptions);
+        }
+
+        // Update clock immediately and then every second
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // Add subtle animation delay to cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.sermon-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.3}s`;
+            });
+        });
+    </script>
 </body>
 </html>
