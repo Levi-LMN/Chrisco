@@ -2,98 +2,138 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Chrisco Church Sermon Display</title>
+  <title>Chrisco Church Thika Sermon Overlay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #ffffff;
-      color: #000;
+      font-family: 'Poppins', sans-serif;
       width: 1920px;
       height: 300px;
+      background: linear-gradient(90deg, #f5f7fa, #c3cfe2);
+      color: #1a237e;
       overflow: hidden;
     }
 
-    .container {
-      width: 100%;
-      height: 100%;
+    .overlay {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      height: 100%;
       padding: 20px 60px;
       box-sizing: border-box;
+      position: relative;
     }
 
-    .top-row {
+    .top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 36px;
-      font-weight: bold;
-      color: #005a9c;
+      font-weight: 600;
+      color: #0d47a1;
+      text-shadow: 1px 1px 2px #cfd8dc;
     }
 
-    .title-row {
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/9/9a/Christian_cross.svg') no-repeat center;
+      background-size: contain;
+    }
+
+    .sermon-title {
       text-align: center;
-      font-size: 56px;
-      font-weight: bold;
-      color: #222;
+      font-size: 64px;
+      font-weight: 800;
+      font-family: 'Great Vibes', cursive;
+      color: #263238;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      animation: zoomIn 1.5s ease-in-out;
     }
 
-    .ticker-container {
-      width: 100%;
+    @keyframes zoomIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .ticker {
+      position: relative;
+      height: 45px;
       overflow: hidden;
-      white-space: nowrap;
-      box-sizing: border-box;
-      border-top: 2px solid #005a9c;
-      margin-top: 10px;
+      background: linear-gradient(to right, #0d47a1, #1976d2);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      font-size: 26px;
+      font-weight: 500;
+      padding-left: 30px;
     }
 
     .ticker-text {
       display: inline-block;
+      white-space: nowrap;
       padding-left: 100%;
-      animation: scroll-left 20s linear infinite;
-      font-size: 28px;
-      color: #444;
+      animation: tickerMove 25s linear infinite;
     }
 
-    @keyframes scroll-left {
-      0% {
-        transform: translateX(0%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
+    @keyframes tickerMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .footer-bar {
+      position: absolute;
+      bottom: 0;
+      right: 60px;
+      font-size: 18px;
+      font-weight: 400;
+      color: #37474f;
+      font-style: italic;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="top-row">
-      <div>Chrisco Church Thika</div>
-      <div id="time-display"></div>
+  <div class="overlay">
+    <div class="top-bar">
+      <div class="logo-area">
+        <div class="logo"></div>
+        <div>Chrisco Church Thika</div>
+      </div>
+      <div id="clock"></div>
     </div>
-    <div class="title-row">
-      Stretch Joyfully Beyond Your Capacity
-    </div>
-    <div class="ticker-container">
+    <div class="sermon-title">Overflowing with Grace</div>
+    <div class="ticker">
       <div class="ticker-text">
-        Sunday Service · Pastor James Kiganjo · June 16, 2025 · All Are Welcome! Join Us Every Sunday at 9:00 AM · Faith Comes by Hearing the Word of God · Chrisco Church Thika
+        Speaker: Pastor James Kiganjo · Date: June 16, 2025 · Sunday Service · Live from Chrisco Church Thika · Join us in person or online · God is doing a new thing in your life today!
       </div>
     </div>
+    <div class="footer-bar">Streaming live every Sunday · Faith. Worship. Community.</div>
   </div>
 
   <script>
-    function updateTime() {
+    function updateClock() {
       const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById('time-display').textContent = `${hours}:${minutes}:${seconds}`;
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${h}:${m}:${s}`;
     }
-    setInterval(updateTime, 1000);
-    updateTime();
+    setInterval(updateClock, 1000);
+    updateClock();
   </script>
 </body>
 </html>
