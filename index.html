@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chrisco Church Thika - Live Overlay</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,16 +14,14 @@
 
         body {
             width: 1920px;
-            height: 280px;
+            height: 300px;
             overflow: hidden;
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
             position: relative;
             --primary: #ffffff;
             --secondary: #fbbf24;
             --accent: #10b981;
-            --bg-dark: rgba(0, 0, 0, 0.8);
-            --bg-light: rgba(255, 255, 255, 0.95);
             --text-primary: #ffffff;
             --text-secondary: #e5e7eb;
         }
@@ -32,221 +30,220 @@
             position: relative;
             width: 100%;
             height: 100%;
-            display: grid;
-            grid-template-areas: 
-                "header header header"
-                "main-content main-content sidebar"
-                "ticker ticker ticker";
-            grid-template-rows: 80px 1fr 70px;
-            grid-template-columns: 1fr 1fr 350px;
-            gap: 0;
-        }
-
-        /* Header Section */
-        .header-section {
-            grid-area: header;
-            background: var(--bg-dark);
-            backdrop-filter: blur(10px);
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 0 60px;
-            border-bottom: 3px solid var(--secondary);
+            gap: 60px;
         }
 
-        .church-branding {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .logo-container {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--secondary), #f59e0b);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.4);
-        }
-
-        .logo-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            font-weight: 800;
-            color: #1a1a2e;
-            text-shadow: none;
-        }
-
-        .church-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -1px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .header-meta {
+        /* Left Section - Church Identity & Live Status */
+        .left-section {
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             gap: 40px;
         }
 
-        .live-status {
+        .church-identity {
             display: flex;
             align-items: center;
-            gap: 12px;
-            background: var(--accent);
-            padding: 12px 24px;
-            border-radius: 25px;
-            box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+            gap: 25px;
+        }
+
+        .logo {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--secondary), #f59e0b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: #1a1a2e;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.4);
+        }
+
+        .church-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
+
+        .church-info .tagline {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 4px;
+            opacity: 0.8;
+        }
+
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--accent), #059669);
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
         }
 
         .live-dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: white;
             border-radius: 50%;
-            animation: pulse-live 1.5s ease-in-out infinite;
+            animation: pulse 1.5s ease-in-out infinite;
         }
 
-        @keyframes pulse-live {
+        @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.2); }
+            50% { opacity: 0.6; transform: scale(1.3); }
         }
 
         .live-text {
             color: white;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .current-time {
-            color: var(--text-primary);
-            font-size: 20px;
-            font-weight: 600;
-            font-family: 'Inter', monospace;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        /* Main Content Section */
-        .main-content {
-            grid-area: main-content;
-            padding: 50px 60px;
+        /* Center Section - Main Content */
+        .center-section {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            gap: 40px;
+            gap: 25px;
+            max-width: 900px;
         }
 
-        .message-section {
-            margin-bottom: 20px;
+        .message-area {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .message-label {
-            font-size: 14px;
+            font-size: 11px;
             color: var(--secondary);
             text-transform: uppercase;
             font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
         }
 
         .message-title {
             font-family: 'Playfair Display', serif;
-            font-size: 58px;
+            font-size: 42px;
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1.1;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .scripture-card {
-            background: var(--bg-dark);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 40px;
-            border-left: 6px solid var(--secondary);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        .scripture-area {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 30px;
+            padding: 25px 35px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .scripture-label {
-            font-size: 12px;
-            color: var(--secondary);
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
+        .scripture-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+        }
+
+        .scripture-content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
         }
 
         .scripture-reference {
-            font-family: 'Crimson Text', serif;
-            font-size: 32px;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            color: var(--secondary);
+            flex-shrink: 0;
+        }
+
+        .scripture-divider {
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(180deg, var(--secondary), transparent);
+            flex-shrink: 0;
         }
 
         .scripture-text {
-            font-family: 'Crimson Text', serif;
-            font-size: 20px;
+            font-size: 16px;
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.5;
             font-style: italic;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
-        /* Sidebar */
-        .sidebar {
-            grid-area: sidebar;
-            padding: 50px 30px;
+        /* Right Section - Info & Time */
+        .right-section {
+            flex-shrink: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            gap: 30px;
-            background: var(--bg-dark);
-            backdrop-filter: blur(10px);
-            border-left: 3px solid var(--secondary);
+            gap: 20px;
+            align-items: flex-end;
+            text-align: right;
         }
 
-        .info-card {
-            background: var(--bg-light);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        .speaker-info {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 18px 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
-        .info-label {
-            font-size: 12px;
+        .speaker-label {
+            font-size: 10px;
             color: #6b7280;
             text-transform: uppercase;
             font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
         }
 
-        .info-content {
-            font-size: 22px;
+        .speaker-name {
+            font-size: 18px;
             color: #1f2937;
             font-weight: 700;
-            line-height: 1.3;
         }
 
-        /* Ticker Section */
-        .ticker-section {
-            grid-area: ticker;
-            background: var(--bg-dark);
-            backdrop-filter: blur(10px);
-            border-top: 3px solid var(--secondary);
+        .time-display {
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+            font-family: 'Inter', monospace;
+            opacity: 0.9;
+        }
+
+        /* Bottom Ticker */
+        .ticker-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid var(--secondary);
             display: flex;
             align-items: center;
             overflow: hidden;
@@ -255,11 +252,11 @@
         .ticker-label {
             background: var(--secondary);
             color: #1a1a2e;
-            padding: 25px 40px;
+            padding: 15px 30px;
             font-weight: 800;
-            font-size: 14px;
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             position: relative;
             flex-shrink: 0;
         }
@@ -268,124 +265,127 @@
             content: '';
             position: absolute;
             top: 0;
-            right: -20px;
+            right: -15px;
             width: 0;
             height: 0;
-            border-left: 20px solid var(--secondary);
-            border-top: 35px solid transparent;
-            border-bottom: 35px solid transparent;
+            border-left: 15px solid var(--secondary);
+            border-top: 25px solid transparent;
+            border-bottom: 25px solid transparent;
         }
 
         .ticker-content {
             flex: 1;
             overflow: hidden;
-            padding: 0 40px;
+            padding: 0 30px;
         }
 
         .ticker-text {
             display: inline-block;
             white-space: nowrap;
             color: var(--text-primary);
-            font-size: 18px;
-            font-weight: 600;
-            animation: scroll-smooth 40s linear infinite;
+            font-size: 15px;
+            font-weight: 500;
+            animation: scroll 35s linear infinite;
             padding-left: 100%;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
-        @keyframes scroll-smooth {
+        @keyframes scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
         }
 
-        /* Entrance Animations */
+        /* Smooth entrance animations */
         .message-title {
             opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease-out 0.5s forwards;
+            transform: translateY(20px);
+            animation: slideUp 1s ease-out 0.3s forwards;
         }
 
-        .scripture-card {
+        .scripture-area {
             opacity: 0;
-            transform: translateX(-30px);
-            animation: fadeInLeft 1s ease-out 0.8s forwards;
+            transform: translateY(20px);
+            animation: slideUp 1s ease-out 0.6s forwards;
         }
 
-        .info-card:nth-child(1) {
+        .speaker-info {
             opacity: 0;
-            transform: translateX(30px);
-            animation: fadeInRight 1s ease-out 0.3s forwards;
+            transform: translateX(20px);
+            animation: slideLeft 1s ease-out 0.4s forwards;
         }
 
-        @keyframes fadeInUp {
+        @keyframes slideUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        @keyframes fadeInLeft {
+        @keyframes slideLeft {
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
 
-        @keyframes fadeInRight {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        /* Subtle glow effects */
+        .logo {
+            animation: glow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
+            100% { box-shadow: 0 0 35px rgba(251, 191, 36, 0.6); }
         }
     </style>
 </head>
 <body>
     <div class="overlay-container">
-        <div class="header-section">
-            <div class="church-branding">
-                <div class="logo-container">
-                    <div class="logo-text">CC</div>
+        <div class="left-section">
+            <div class="church-identity">
+                <div class="logo">CC</div>
+                <div class="church-info">
+                    <h1>CHRISCO CHURCH THIKA</h1>
+                    <div class="tagline">Faith • Community • Purpose</div>
                 </div>
-                <div class="church-name">CHRISCO CHURCH THIKA</div>
             </div>
             
-            <div class="header-meta">
-                <div class="live-status">
-                    <div class="live-dot"></div>
-                    <div class="live-text">Live</div>
-                </div>
-                <div class="current-time" id="currentTime">10:30 AM</div>
+            <div class="live-badge">
+                <div class="live-dot"></div>
+                <div class="live-text">Live</div>
             </div>
         </div>
 
-        <div class="main-content">
-            <div class="message-section">
+        <div class="center-section">
+            <div class="message-area">
                 <div class="message-label">Today's Message</div>
                 <div class="message-title">Walking in Faith Through Trials</div>
             </div>
             
-            <div class="scripture-card">
-                <div class="scripture-label">Scripture Reading</div>
-                <div class="scripture-reference">James 1:2-4</div>
-                <div class="scripture-text">
-                    "Consider it pure joy, my brothers and sisters, whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance."
+            <div class="scripture-area">
+                <div class="scripture-content">
+                    <div class="scripture-reference">James 1:2-4</div>
+                    <div class="scripture-divider"></div>
+                    <div class="scripture-text">
+                        "Consider it pure joy, my brothers and sisters, whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance."
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="sidebar">
-            <div class="info-card">
-                <div class="info-label">Speaker</div>
-                <div class="info-content">Pastor Michael Kamau</div>
+        <div class="right-section">
+            <div class="speaker-info">
+                <div class="speaker-label">Speaker</div>
+                <div class="speaker-name">Pastor Michael Kamau</div>
             </div>
+            <div class="time-display" id="currentTime">10:30 AM</div>
         </div>
+    </div>
 
-        <div class="ticker-section">
-            <div class="ticker-label">Announcements</div>
-            <div class="ticker-content">
-                <div class="ticker-text">
-                    Prayer Night every Wednesday at 7:00 PM • Youth Fellowship Saturdays at 4:00 PM • Baptism Service June 25th • Women's Conference "Daughters of Purpose" July 8-10 • Men's Breakfast Fellowship next Saturday 8:00 AM • Children's Sunday School starts 9:00 AM • Mid-week Bible Study Thursday 7:00 PM
-                </div>
+    <div class="ticker-bar">
+        <div class="ticker-label">Announcements</div>
+        <div class="ticker-content">
+            <div class="ticker-text">
+                Prayer Night every Wednesday at 7:00 PM • Youth Fellowship Saturdays at 4:00 PM • Baptism Service June 25th • Women's Conference "Daughters of Purpose" July 8-10 • Men's Breakfast Fellowship next Saturday 8:00 AM • Children's Sunday School starts 9:00 AM • Mid-week Bible Study Thursday 7:00 PM
             </div>
         </div>
     </div>
