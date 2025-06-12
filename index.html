@@ -2,101 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Chrisco Thika Sermon Title</title>
+  <title>Chrisco Church Sermon Display</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Calibri', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #ffffff;
-      color: #222;
+      color: #000;
+      width: 1920px;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      justify-content: space-between;
+      padding: 20px 60px;
       box-sizing: border-box;
     }
-    .container {
-      text-align: center;
-      max-width: 80%;
-      padding: 20px;
-      border: 4px solid #005a9c;
-      background: rgba(255,255,255,0.9);
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
-      border-radius: 20px;
-      transition: all 0.5s ease;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 1s ease forwards;
-    }
-    .church-name {
-      font-size: 48px;
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 36px;
       font-weight: bold;
       color: #005a9c;
-      margin-bottom: 10px;
     }
-    .title {
-      font-size: 60px;
+
+    .title-row {
+      text-align: center;
+      font-size: 56px;
       font-weight: bold;
-      margin: 10px 0;
+      color: #222;
     }
-    .meta {
+
+    .ticker-container {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      border-top: 2px solid #005a9c;
+      margin-top: 10px;
+    }
+
+    .ticker-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll-left 20s linear infinite;
       font-size: 28px;
       color: #444;
     }
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0%);
       }
-    }
-    #form {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #fff;
-      border: 2px solid #005a9c;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      font-size: 16px;
-      z-index: 10;
-    }
-    #form input {
-      margin-bottom: 10px;
-      padding: 5px;
-      width: 100%;
-    }
-    #form button {
-      background-color: #005a9c;
-      color: white;
-      padding: 6px 12px;
-      border: none;
-      cursor: pointer;
+      100% {
+        transform: translateX(-100%);
+      }
     }
   </style>
 </head>
 <body>
-  <div id="form">
-    <input type="text" id="input-title" placeholder="Enter sermon title"><br>
-    <input type="text" id="input-meta" placeholder="Enter speaker & date"><br>
-    <button onclick="updateSermon()">Update</button>
-  </div>
-
   <div class="container">
-    <div class="church-name">Chrisco Church Thika</div>
-    <div class="title" id="sermon-title">Stretch Joyfully Beyond Your Capacity</div>
-    <div class="meta" id="sermon-meta">June 16, 2025 · Pastor James Kiganjo</div>
+    <div class="top-row">
+      <div>Chrisco Church Thika</div>
+      <div id="time-display"></div>
+    </div>
+    <div class="title-row">
+      Stretch Joyfully Beyond Your Capacity
+    </div>
+    <div class="ticker-container">
+      <div class="ticker-text">
+        Sunday Service · Pastor James Kiganjo · June 16, 2025 · All Are Welcome! Join Us Every Sunday at 9:00 AM · Faith Comes by Hearing the Word of God · Chrisco Church Thika
+      </div>
+    </div>
   </div>
 
   <script>
-    function updateSermon() {
-      const title = document.getElementById('input-title').value;
-      const meta = document.getElementById('input-meta').value;
-      if (title) document.getElementById('sermon-title').innerText = title;
-      if (meta) document.getElementById('sermon-meta').innerText = meta;
+    function updateTime() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('time-display').textContent = `${hours}:${minutes}:${seconds}`;
     }
+    setInterval(updateTime, 1000);
+    updateTime();
   </script>
 </body>
 </html>
