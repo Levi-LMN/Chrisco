@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chrisco Church Thika - Live Overlay</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Source+Serif+Pro:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,42 +13,22 @@
         }
 
         body {
-            width: 1920px;
-            height: 300px;
+            width: 1900px;
+            height: 280px;
             overflow: hidden;
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, 
-                #0f172a 0%, 
-                #1e293b 25%, 
-                #334155 50%, 
-                #1e40af 75%, 
-                #3b82f6 100%);
+                #1e293b 0%, 
+                #334155 30%, 
+                #475569 100%);
             position: relative;
-            --primary-blue: #3b82f6;
-            --secondary-blue: #60a5fa;
-            --accent-blue: #93c5fd;
-            --dark-blue: #1e40af;
-            --glass-bg: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.12);
-        }
-
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(147, 197, 253, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 40% 60%, rgba(96, 165, 250, 0.08) 0%, transparent 50%);
-            animation: backgroundShift 20s ease-in-out infinite;
-        }
-
-        @keyframes backgroundShift {
-            0%, 100% { opacity: 0.8; filter: blur(0px); }
-            50% { opacity: 1; filter: blur(1px); }
+            --primary-gold: #d4af37;
+            --secondary-gold: #f4e4bc;
+            --accent-blue: #60a5fa;
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         .overlay-container {
@@ -56,492 +36,329 @@
             width: 100%;
             height: 100%;
             display: grid;
-            grid-template-rows: 90px 1fr 70px;
-            padding: 20px 35px;
+            grid-template-rows: 60px 1fr 50px;
+            padding: 20px 40px;
             z-index: 10;
         }
 
-        /* Advanced Header */
+        /* Simple Header */
         .header-section {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
         }
 
         .church-identity {
             display: flex;
             align-items: center;
-            gap: 25px;
-            position: relative;
+            gap: 20px;
         }
 
-        .logo-container {
-            position: relative;
-            width: 70px;
-            height: 70px;
-        }
-
-        .logo-ring {
-            position: absolute;
-            inset: 0;
-            border: 2px solid transparent;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, var(--primary-blue), var(--secondary-blue), var(--accent-blue), var(--primary-blue));
-            animation: logoRotate 8s linear infinite;
-            padding: 3px;
-        }
-
-        .logo-ring::before {
-            content: '';
-            position: absolute;
-            inset: 3px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
-            border-radius: 50%;
-            backdrop-filter: blur(10px);
-        }
-
-        @keyframes logoRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .logo-content {
-            position: absolute;
-            inset: 8px;
-            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-            border-radius: 50%;
+        .logo-simple {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary-gold), #b8860b);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--dark-blue);
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
-            z-index: 2;
-        }
-
-        .church-title {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
         }
 
         .church-name {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 36px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 30%, #ffffff 60%, #cbd5e1 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% 100%;
-            animation: textShimmer 3s ease-in-out infinite;
-            letter-spacing: -0.5px;
-            text-shadow: 0 0 30px rgba(255,255,255,0.5);
-        }
-
-        @keyframes textShimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .church-subtitle {
-            font-size: 12px;
-            color: var(--accent-blue);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0.8;
-        }
-
-        /* Premium Status Bar */
-        .status-bar {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(30px);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            padding: 12px 25px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .status-bar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: statusSweep 4s ease-in-out infinite;
-        }
-
-        @keyframes statusSweep {
-            0% { left: -100%; }
-            50% { left: 100%; }
-            100% { left: 100%; }
-        }
-
-        .live-indicator {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .live-pulse {
-            position: relative;
-            width: 10px;
-            height: 10px;
-            background: #ef4444;
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
-        }
-
-        .live-pulse::before {
-            content: '';
-            position: absolute;
-            inset: -5px;
-            border: 2px solid #ef4444;
-            border-radius: 50%;
-            animation: livePulseRing 2s ease-out infinite;
-        }
-
-        @keyframes livePulseRing {
-            0% {
-                transform: scale(0.8);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(2);
-                opacity: 0;
-            }
-        }
-
-        .live-text {
-            color: #ffffff;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
             font-weight: 600;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .time-container {
-            display: flex;
-            flex-direction: column;
-            align-items: end;
-            gap: 2px;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
         }
 
         .time-display {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 18px;
-            font-weight: 600;
-            color: #ffffff;
-            background: linear-gradient(45deg, #ffffff, #e2e8f0);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-secondary);
+            opacity: 0.7;
+            text-align: right;
         }
 
-        .date-display {
-            font-size: 10px;
-            color: var(--accent-blue);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Next-Gen Content Cards */
-        .content-grid {
+        /* Message-Focused Content */
+        .content-section {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            padding: 15px 0;
-        }
-
-        .content-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 25px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            cursor: pointer;
-        }
-
-        .content-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.1) 0%, 
-                transparent 50%, 
-                rgba(59,130,246,0.1) 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .content-card:hover::before {
-            opacity: 1;
-        }
-
-        .content-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            border-color: rgba(255,255,255,0.25);
-            box-shadow: 
-                0 20px 40px rgba(0,0,0,0.2),
-                0 0 0 1px rgba(255,255,255,0.1),
-                inset 0 1px 0 rgba(255,255,255,0.2);
-        }
-
-        .card-icon {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto 15px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-            border-radius: 12px;
-            display: flex;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            padding: 20px 0;
             align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 18px;
+        }
+
+        .message-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message-title-section {
+            margin-bottom: 20px;
+        }
+
+        .message-label {
+            font-size: 12px;
+            color: var(--primary-gold);
+            text-transform: uppercase;
             font-weight: 600;
-            box-shadow: 0 8px 20px rgba(59,130,246,0.3);
-            transition: transform 0.3s ease;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
         }
 
-        .content-card:hover .card-icon {
-            transform: rotateY(180deg);
+        .message-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.2;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
-        .card-label {
+        .scripture-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 25px;
+            border-left: 4px solid var(--primary-gold);
+        }
+
+        .scripture-label {
             font-size: 11px;
+            color: var(--primary-gold);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .scripture-reference {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .scripture-text {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .service-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .info-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .info-label {
+            font-size: 10px;
             color: var(--accent-blue);
             text-transform: uppercase;
             font-weight: 600;
             letter-spacing: 1.5px;
-            margin-bottom: 10px;
-            opacity: 0.9;
+            margin-bottom: 8px;
         }
 
-        .card-title {
-            font-family: 'Space Grotesk', sans-serif;
+        .info-content {
             font-size: 18px;
-            color: #ffffff;
-            font-weight: 600;
-            line-height: 1.3;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            color: var(--text-primary);
+            font-weight: 500;
         }
 
-        .verse-title {
-            font-style: italic;
-            color: var(--accent-blue);
+        .live-indicator-card {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            border: none;
+            color: white;
         }
 
-        /* Ultra-Modern Ticker */
-        .news-ticker {
+        .live-pulse {
+            width: 8px;
+            height: 8px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        /* Clean Ticker */
+        .ticker-section {
             background: var(--glass-bg);
-            backdrop-filter: blur(30px);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 35px;
+            border-radius: 25px;
             display: flex;
             align-items: center;
             overflow: hidden;
-            position: relative;
-            height: 60px;
+            height: 50px;
         }
 
-        .news-ticker::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: conic-gradient(from 0deg at 50% 50%, 
-                transparent 0deg, 
-                rgba(59,130,246,0.1) 90deg, 
-                transparent 180deg, 
-                rgba(147,197,253,0.1) 270deg, 
-                transparent 360deg);
-            animation: tickerGlow 6s linear infinite;
-            border-radius: 35px;
-        }
-
-        @keyframes tickerGlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .ticker-badge {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-            color: #ffffff;
-            padding: 16px 28px;
+        .ticker-label {
+            background: var(--primary-gold);
+            color: #1e293b;
+            padding: 12px 24px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
-            border-radius: 35px 0 0 35px;
-            position: relative;
-            z-index: 2;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+            letter-spacing: 1px;
+            border-radius: 25px 0 0 25px;
+            white-space: nowrap;
         }
 
-        .ticker-badge::after {
-            content: '';
-            position: absolute;
-            right: -20px;
-            top: 0;
-            bottom: 0;
-            width: 40px;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-            clip-path: polygon(0 0, 60% 50%, 0 100%);
-        }
-
-        .ticker-flow {
+        .ticker-content {
             flex: 1;
             overflow: hidden;
-            padding: 0 30px;
-            position: relative;
-            z-index: 2;
+            padding: 0 20px;
         }
 
         .ticker-text {
             display: inline-block;
             white-space: nowrap;
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 500;
-            animation: tickerScroll 35s linear infinite;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 400;
+            animation: scroll 30s linear infinite;
             padding-left: 100%;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        @keyframes tickerScroll {
+        @keyframes scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
         }
 
-        /* Ambient Particles */
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(147,197,253,0.6);
-            border-radius: 50%;
-            pointer-events: none;
+        /* Subtle animations */
+        .message-title {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
         }
 
-        .particle:nth-child(1) {
-            top: 20%;
-            left: 10%;
-            animation: float1 12s ease-in-out infinite;
+        .scripture-section {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.8s forwards;
         }
 
-        .particle:nth-child(2) {
-            top: 60%;
-            left: 90%;
-            animation: float2 15s ease-in-out infinite;
+        .info-card:nth-child(1) {
+            opacity: 0;
+            animation: fadeInRight 1s ease-out 0.3s forwards;
         }
 
-        .particle:nth-child(3) {
-            top: 80%;
-            left: 20%;
-            animation: float3 18s ease-in-out infinite;
+        .info-card:nth-child(2) {
+            opacity: 0;
+            animation: fadeInRight 1s ease-out 0.6s forwards;
         }
 
-        @keyframes float1 {
-            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
-            33% { transform: translate(30px, -20px) scale(1.2); opacity: 1; }
-            66% { transform: translate(-20px, -40px) scale(0.8); opacity: 0.4; }
+        .info-card:nth-child(3) {
+            opacity: 0;
+            animation: fadeInRight 1s ease-out 0.9s forwards;
         }
 
-        @keyframes float2 {
-            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
-            50% { transform: translate(-40px, -30px) scale(1.3); opacity: 0.8; }
-        }
-
-        @keyframes float3 {
-            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
-            25% { transform: translate(25px, -15px) scale(0.9); opacity: 0.3; }
-            75% { transform: translate(-15px, -25px) scale(1.1); opacity: 1; }
-        }
-
-        /* Staggered entrance animations */
-        .content-card:nth-child(1) { animation: cardEnter 1s ease-out 0.2s both; }
-        .content-card:nth-child(2) { animation: cardEnter 1s ease-out 0.4s both; }
-        .content-card:nth-child(3) { animation: cardEnter 1s ease-out 0.6s both; }
-
-        @keyframes cardEnter {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(40px) scale(0.8);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
     </style>
 </head>
 <body>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    
     <div class="overlay-container">
         <div class="header-section">
             <div class="church-identity">
-                <div class="logo-container">
-                    <div class="logo-ring"></div>
-                    <div class="logo-content">CC</div>
+                <div class="logo-simple">CC</div>
+                <div class="church-name">CHRISCO CHURCH THIKA</div>
+            </div>
+            <div class="time-display" id="time">10:30 AM</div>
+        </div>
+
+        <div class="content-section">
+            <div class="message-content">
+                <div class="message-title-section">
+                    <div class="message-label">Today's Message</div>
+                    <div class="message-title">Walking in Faith Through Trials</div>
                 </div>
-                <div class="church-title">
-                    <div class="church-name">CHRISCO CHURCH THIKA</div>
-                    <div class="church-subtitle">Live Worship Experience</div>
+                
+                <div class="scripture-section">
+                    <div class="scripture-label">Scripture Reading</div>
+                    <div class="scripture-reference">James 1:2-4</div>
+                    <div class="scripture-text">
+                        "Consider it pure joy, my brothers and sisters, whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance."
+                    </div>
                 </div>
             </div>
-            
-            <div class="status-bar">
-                <div class="live-indicator">
-                    <div class="live-pulse"></div>
-                    <span class="live-text">Live</span>
+
+            <div class="service-info">
+                <div class="info-card live-indicator-card">
+                    <div class="info-content">
+                        <span class="live-pulse"></span>LIVE NOW
+                    </div>
                 </div>
-                <div class="time-container">
-                    <div class="time-display" id="time">10:30 AM</div>
-                    <div class="date-display" id="date">Sunday Service</div>
+                
+                <div class="info-card">
+                    <div class="info-label">Speaker</div>
+                    <div class="info-content">Pastor Michael Kamau</div>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-label">Service</div>
+                    <div class="info-content">Sunday Worship</div>
                 </div>
             </div>
         </div>
 
-        <div class="content-grid">
-            <div class="content-card">
-                <div class="card-icon">📖</div>
-                <div class="card-label">Today's Message</div>
-                <div class="card-title">Walking in Faith Through Trials</div>
-            </div>
-            <div class="content-card">
-                <div class="card-icon">✨</div>
-                <div class="card-label">Scripture Reading</div>
-                <div class="card-title verse-title">James 1:2-4</div>
-            </div>
-            <div class="content-card">
-                <div class="card-icon">🎙️</div>
-                <div class="card-label">Speaker</div>
-                <div class="card-title">Pastor Michael Kamau</div>
-            </div>
-        </div>
-
-        <div class="news-ticker">
-            <div class="ticker-badge">Church Updates</div>
-            <div class="ticker-flow">
+        <div class="ticker-section">
+            <div class="ticker-label">Announcements</div>
+            <div class="ticker-content">
                 <div class="ticker-text">
-                    🙏 Join us for Prayer Night every Wednesday at 7:00 PM • 👥 Youth Fellowship meets Saturdays at 4:00 PM • 💒 Upcoming baptism service on June 25th • 👩‍💼 Women's Conference: "Daughters of Purpose" - July 8-10 • ☕ Men's Breakfast Fellowship next Saturday at 8:00 AM • 👶 Children's Sunday School starts at 9:00 AM • 📖 Mid-week Bible Study continues this Thursday
+                    Prayer Night every Wednesday at 7:00 PM • Youth Fellowship Saturdays at 4:00 PM • Baptism Service June 25th • Women's Conference "Daughters of Purpose" July 8-10 • Men's Breakfast Fellowship next Saturday 8:00 AM • Children's Sunday School starts 9:00 AM • Mid-week Bible Study Thursday
                 </div>
             </div>
         </div>
@@ -557,47 +374,11 @@
                 timeZone: 'Africa/Nairobi'
             };
             
-            const dateOptions = {
-                weekday: 'long',
-                month: 'short',
-                day: 'numeric',
-                timeZone: 'Africa/Nairobi'
-            };
-            
             document.getElementById('time').textContent = now.toLocaleTimeString('en-US', timeOptions);
-            document.getElementById('date').textContent = now.toLocaleDateString('en-US', dateOptions);
         }
 
         updateClock();
         setInterval(updateClock, 1000);
-
-        // Advanced interaction effects
-        document.querySelectorAll('.content-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.background = 'rgba(255, 255, 255, 0.15)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.background = 'var(--glass-bg)';
-            });
-        });
-
-        // Dynamic particle generation
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            particle.style.animationDelay = Math.random() * 5 + 's';
-            document.body.appendChild(particle);
-            
-            setTimeout(() => {
-                particle.remove();
-            }, 20000);
-        }
-
-        setInterval(createParticle, 3000);
     </script>
 </body>
 </html>
